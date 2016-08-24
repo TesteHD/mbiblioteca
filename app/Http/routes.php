@@ -11,4 +11,4 @@
 |
 */
 
-Route::resource('livro', 'LivroController');
+Route::resource('livros', 'LivroController');
