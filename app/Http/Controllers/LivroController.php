@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 
 use Request;
+use App\Livro;
 
 class LivroController extends Controller
 {
