@@ -1,8 +1,8 @@
-@extends('layout/app')
+@extends('layout.app')
 
 @section('content')
-    <h1>Minha Livraria</h1>
-    <a href="{{url('/livro/create')}}" class="btn btn-success">Criar um Livro</a>
+    <h1>Minha Biblioteca</h1>
+    <a href="{{url('/livros/create')}}" class="btn btn-success">Adicionar um novo Livro</a>
     <hr>
     <table class="table table-striped table-bordered table-hover">
         <thead>
@@ -24,11 +24,11 @@
                 <td>{{ $livro->autor }}</td>
                 <td>{{ $livro->editora }}</td>
                 <td>{{ $livro->publicacao }}</td>
-                <td><img src="{{asset('img/'.$livro->image.'.jpg')}}" height="35" width="30"></td>
-                <td><a href="{{url('livro',$livro->id)}}" class="btn btn-primary">Ler</a></td>
-                <td><a href="{{route('livro.edit',$livro->id)}}" class="btn btn-warning">Alterar</a></td>
+                <td><img src="{{asset('img/'.$livro->image)}}" height="35" width="30"></td>
+                <td><a href="{{url('livros',$livro->id)}}" class="btn btn-primary">Ler</a></td>
+                <td><a href="{{route('livros.edit',$livro->id)}}" class="btn btn-warning">Alterar</a></td>
                 <td>
-                    {!! Form::open(['method' => 'DELETE', 'route'=>['livro.destroy', $livro->id]]) !!}
+                    {!! Form::open(['method' => 'DELETE', 'route'=>['livros.destroy', $livro->id]]) !!}
                     {!! Form::submit('Apagar', ['class' => 'btn btn-danger']) !!}
                     {!! Form::close() !!}
                 </td>
