@@ -11,4 +11,6 @@
 |
 */
 
+Route::get('/', 'LivroController@index');
+
 Route::resource('livros', 'LivroController');
