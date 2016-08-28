@@ -1,13 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
-//use Illuminate\Http\Request;
-
 use App\Http\Requests;
-
-use Request;
 use App\Livro;
+use Request;
+use App\Http\Requests\FormRequest;
+
 
 class LivroController extends Controller
 {
@@ -38,11 +36,22 @@ class LivroController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FormRequest $rq)
     {
-        $livro=Request::all();
-        Livro::create($livro);
-        return redirect('livro');
+        $livro= new Livro(array (
+            "titulo" => $rq->get("titulo"),
+            "autor"=> $rq->get("autor"),
+            "editora"=> $rq->get("editora"),
+            "publicacao"=> $rq->get("publicacao"),
+            "descricao"=>$rq->get("descricao"),
+            "image"=>$rq->file("image")->getClientOriginalName()
+        ));
+        
+        $rq->file("image")->move( base_path() . '/public/img' , $rq->file("image")->getClientOriginalName());
+
+
+          $livro->save();
+        return redirect('livros');
     }
 
     /**
@@ -76,12 +85,26 @@ class LivroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FormRequest $rq, $id)
     {
-        $livro2=Request::all();
+        $livro2= array (
+            "titulo" => $rq->get("titulo"),
+            "autor"=> $rq->get("autor"),
+            "editora"=> $rq->get("editora"),
+            "publicacao"=> $rq->get("publicacao"),
+            "descricao"=>$rq->get("descricao"),
+        );
+
+        if(!($rq->file("image")===NULL)) {
+            error_log($rq->file("image")->getClientOriginalName());
+            $rq->file("image")->move(base_path() . '/public/img', $rq->file("image")->getClientOriginalName());
+            $livro2["image"]  = $rq->file("image")->getClientOriginalName();
+
+        }
+
         $livro=Livro::find($id);
         $livro->update($livro2);
-        return redirect('livro');
+        return redirect('livros');
     }
 
     /**
@@ -93,6 +116,6 @@ class LivroController extends Controller
     public function destroy($id)
     {
         Livro::find($id)->delete();
-        return redirect('livro');
+        return redirect('livros');
     }
 }
