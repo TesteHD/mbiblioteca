@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 
 use App\Http\Requests;
+
+use Request;
 
 class LivroController extends Controller
 {
@@ -15,7 +17,8 @@ class LivroController extends Controller
      */
     public function index()
     {
-        //
+        $livros = Livro::all();
+        return view('livros.index',compact('livros'));
     }
 
     /**
@@ -25,7 +28,7 @@ class LivroController extends Controller
      */
     public function create()
     {
-        //
+        return view('livros.create');
     }
 
     /**
@@ -36,7 +39,9 @@ class LivroController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $livro=Request::all();
+        Livro::create($livro);
+        return redirect('livro');
     }
 
     /**
@@ -47,7 +52,8 @@ class LivroController extends Controller
      */
     public function show($id)
     {
-        //
+        $livro=Livro::find($id);
+        return view('livros.show',compact('livro'));
     }
 
     /**
@@ -58,7 +64,8 @@ class LivroController extends Controller
      */
     public function edit($id)
     {
-        //
+        $livro=Livro::find($id);
+        return view('livros.edit',compact('livro'));
     }
 
     /**
@@ -70,7 +77,10 @@ class LivroController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $livro2=Request::all();
+        $livro=Livro::find($id);
+        $livro->update($livro2);
+        return redirect('livro');
     }
 
     /**
@@ -81,6 +91,7 @@ class LivroController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Livro::find($id)->delete();
+        return redirect('livro');
     }
 }
