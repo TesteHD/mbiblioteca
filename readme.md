@@ -1,8 +1,6 @@
 # mBiblioteca
 > Para gerir os livros da minha mini biblioteca pessaol, e mostrar as como é possivel implementar CRUD e SEEd em Laravel 5
 
-[![NPM Version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
 
 
 É um projeto que resulta de um tutorial para demostrar e forma pratica como funiona o CRUD e SEED em Laravel e como implementar de forma rápida e agil. O projeto permte adicionar um novo livro com informações básicas, editar, apagar e visualizar os dados juntamente com a imagem da capa. 
